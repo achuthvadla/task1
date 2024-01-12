@@ -1,0 +1,192 @@
+<html>
+    <head>
+        <title>xml sample</title>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    
+    </head>
+    <body>
+        <div>
+        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;is known in the statistics literature as model-free estimation or nonparametric statistical
+inference. A premise of this chapter is that, for learning from heterogeneous time series,
+indiscriminate use of such models is too unmanageable. This is especially true in
+diagnostic monitoring applications such as crisis monitoring, because decision surfaces
+are more sensitive to error when the target concept is a catastrophic event (Hsu et al.,
+1998).<br>
+            The purpose of using model selection in decomposable learning problems is to fit
+a suitable hypothesis language (model) to each subproblem (Engels, Verdenius, &
+Aha,1998). A subproblem is defined in terms of a subset of the input and an intermediate
+concept, formed by unsupervised learning from that subset. Selecting a model entails
+three tasks. The first is finding partitions that are consistent enough to admit at most
+one “suitable” model per subset. The second is building a collection of models that is
+flexible enough so that some partition can have at least one model matched to each of
+its subsets. The third is to derive a principled quantitative system for model evaluation
+so that exactly one model can be correctly chosen per subset of the acceptable partition
+or partitions. These tasks indicate that a model selection system at the level of
+subproblem definition is desirable, because this corresponds to the granularity of
+problem decomposition, the design choices for the collection of models, and the
+evaluation function. This is a more comprehensive optimization problem than traditional
+model selection typically adopts (Geman et al., 1992; Hjorth, 1994), but it is also
+approached from a less precise perspective, hence the term coarse-grained.</p>
+            <h1 style="text-align: center;">RESULTS</h1>
+            <h2>Synthetic and Small-Scale Data Mining Problems</h2>
+            <div>
+                <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;This section presents experimental results with comparisons to existing inductive
+learning systems (Kohavi, Sommerfield & Dougherty, 1996): decision trees, traditional
+regression-based methods as adapted to time series prediction, and non-modular
+probabilistic networks (both atemporal and ARIMA-type ANNs).</p>
+             <h1>The Modular Parity Problem</h1>
+             <div>
+                <p>
+                 Figure 3 shows the classification accuracy in percent for specialist and moderator
+output for the concept:</p>
+                  <p style="text-align: center;"><img src="images/img1.jpg" alt="Image Description">
+                  
+                <p>All mixture models are trained using 24 hidden units, distributed across all specialists
+            and moderators. When used as a heuristic evaluation function for partition search,
+            the HME metric documented in the previous section finds the best partition for the 5-
+            attribute problem (shown below) as well as 6, 7, and 8, with no backtracking, and indicates
+            that an MS-HME model should be used.
+        </p>
+        
+        <p>This section documents improvements in classification accuracy as achieved by
+            attribute partitioning. Figure 3 shows how the optimum partition {{1,2,3}{4,5}} for the
+            concept:<br>
+            parity(x1, x2, x3) × parity(x4, x5)<br>
+            achieves the best specialist performance for any size-2 partition.
+        </p>
+
+        <p>Figure 3 shows how this allows it to achieve the best moderator performance overall.
+            Empirically, “good splits” – especially descendants and ancestors of the optimal one, i.e.,
+            members of its schema (Goldberg, 1989) – tend to perform well.
+        </p>
+
+        <p>As documented in the background section, partition search is able to find Partition #16,
+            {{1,2,3}{4,5}} (the optimum partition) after expanding all of the 2-subset partitions. This
+            reduces Bn evaluations to Θ<i>(2n);</i> attribute partitioning therefore remains an intractable
+            problem, but is more feasible for small to moderate numbers of attributes (30-40 can be handled
+            by high-performance computers, instead of 15-20 using exhaustive search). Approximation
+            algorithms for polynomial-time evaluation (Cormen <i>et al.,</i> 2001) are currently being investigated
+            by the author.
+        </p>
+
+        <p>For experiments using specialist-moderator networks on a musical tune classification
+            problem – synthetic data quantized from real-world audio recordings – the interested
+            reader is referred to Hsu <i>et al.</i> (2000).<br><br>
+        </p>
+
+        <h2>Application: Crop Condition Monitoring</h2>
+
+        <p>Figure 4 visualizes a heterogeneous time series. The lines shown are phased
+            <i>autocorrelograms,</i> or plots of autocorrelation shifted in time, for (subjective) weekly
+            <i>crop condition</i> estimates, averaged from 1985-1995 for the state of Illinois. Each <i>point</i>
+            represents the correlation between one week’s mean estimate and the mean estimate for
+            a subsequent week. Each <i>line</i> contains the correlation between values for a particular<br><br>
+        <i>Figure 3: Mean classification accuracy of specialists vs. moderators for all (52)
+            partitions of 5-attribute modular parity problem.</i> <br>
+            <p style="text-align: center;"><img src="images/img2.jpg" alt="Image Description">
+        </p>
+        <p>week and all subsequent weeks. The data is heterogeneous because it contains both an
+autoregressive pattern (the linear increments in autocorrelation for the first ten weeks)
+and a moving average pattern (the larger, unevenly spaced increments from 0.4 to about
+0.95 in the rightmost column). The autoregressive process, which can be represented by
+a time-delay model, expresses weather “memory” (correlating early and late drought); the
+moving average process, which can be represented by an exponential trace model,
+physiological damage from drought. Task decomposition can improve performance here
+by isolating the AR and MA components for identification and application of the correct
+specialized architecture – a time delay neural network (Haykin, 1999; Lang <i>et al.,</i> 1990)
+or simple recurrent network (Principé & Lefebvre, 2001), respectively.</p>
+        <p>We applied a simple mixture model to reduce variance in ANN-based classifiers. A
+            paired t-test with 10 degrees of freedom (for 11-<i>year</i> cross-validation over the weekly
+            predictions) indicates significance at the level of <i>p</i> &lt; 0.004 for the moderator versus TDNN
+            and at the level of <i>p</i> &lt; 0.0002 for the moderator versus IR. The null hypothesis is rejected
+            at the 95% level of confidence for TDNN outperforming IR (<i>p</i> &lt; 0.09), which is consistent
+            with the hypothesis that an MS-HME network yields a performance boost over either
+            network type alone. This result, however, is based on relatively few samples (in terms
+            of weeks per year) and very coarse spatial granularity (statewide averages).
+        </p>
+        
+        <p>Table 3 summarizes the performance of an MS-HME network versus that of other
+            induction algorithms from <i>MLC</i>++ (Kohavi <i>et al.,</i> 1996) on the crop condition monitoring
+            problem. This experiment illustrates the usefulness of learning task decomposition over
+            heterogeneous time series. The improved learning results due to the application of multiple
+            models (TDNN and IR specialists) and a mixture model (the Gamma network moderator).
+            Reports from the literature on common statistical models for time series (Box <i>et al.,</i> 1994;
+            Gershenfeld & Weigend, 1994; Neal, 1996) and experience with the (highly heteroge-
+        </p><br><br>
+            
+        <p><i>Figure 4: Phased autocorrelogram (plot of autocorrelation shifted over time) for crop
+condition (average quantized estimates).</i></p><br>
+                 <p style="text-align: center;"><img src="images/img3.jpg" alt="Image Description"><br><br>
+        <p>neous) test bed domains documented here bears out the idea that “fitting the right tool
+to each job” is critical.</p>
+        
+         <h1 style="text-align: center;">Application: Loss Ratio Prediction in Automobile Insurance Pricing</h1>
+         <div style="text-align: left; margin: 20px;">
+         <p>Table 4 summarizes the performance of the <i>ID3</i> decision tree induction algorithm
+            and the state-space search-based feature subset selection (FSS) wrapper in <i>MLC++</i>
+            (Kohavi <i>et al.,</i> 1996) compared to that of a <i>genetic wrapper</i> for feature selection. This
+            system is documented in detail in Hsu, Welge, Redman, and Clutter (2002). We used a
+            version of <i>ALLVAR-2</i>, a data set for decision support in automobile insurance policy
+            pricing. This data set was used for clustering and classification and initially contained
+            471-attribute record for each of over 300,000 automobile insurance policies, with five bins
+            of <i>loss ratio</i> as a prediction target. Wall clock time for the <i>Jenesis</i> and <i>FSS-ID3</i> wrappers
+            was comparable. As the table shows, both the <i>Jenesis</i> wrapper and the<i>MLC</i>++ wrapper
+            (using <i>ID3</i> as the wrapped inducer) produce significant improvements over unwrapped
+            <i>ID3</i> in classification accuracy and very large reductions in the number of attributes used.
+            The test set accuracy and the number of selected attributes are averaged over five cross
+            validation folds (70 aggregate test cases each). Results for data sets from the Irvine
+            database repository that are known to contain irrelevant attributes are also positive.
+            Table 10 presents more descriptive statistics on the five-way cross-validated performance
+            of ID3, FSS-ID3 (the<i>MLC</i>++ implementation of <i>ID3</i> with its feature subset
+            selection wrapper), and <i>Jenesis</i>. Severe overfitting is quite evident for <i>ID3</i>, based on the
+            Table 3: Performance of a HME-type mixture model compared with compared with that
+            of other inducers on the crop condition monitoring problem
+         </p><br>
+         <p><i>Table 3: Performance of a HME-type mixture model compared with compared with that
+of other inducers on the crop condition monitoring problem</i></p>
+             <p style="text-align: center;"><img src="images/img4.jpg" alt="Image Description"><br><br>
+             
+         <p>difference between training and test set error (perfect purity is achieved in all five folds)
+and the larger number of attributes actually used compared to the wrappers. <i>Jenesis</i> and
+<i>FSS-ID3</i> perform comparably in terms of test set error, though <i>FSS-ID3</i> has less
+difference between training and test set error. and <i>Jenesis</i> is less likely to overprune the
+             attribute subset. Note that <i>FSS-ID3</i> consistently selects the fewest attributes, but still
+overfits (Jenesis achieves lower test set error in three of five cross validation cases). The
+             test set errors of <i>Jenesis</i> and <i>FSS-ID3</i> are not significantly different, so generalization
+quality is not conclusively distinguishable in this case. We note, however, that
+excessively shrinking the subset indicates a significant tradeoff regarding generalization
+quality. The classification model was used to audit an existing rule-based classification
+system over the same instance space, and to calibrate an underwriting model (to guide
+pricing decisions for policies) for an experimental market.</p><br>
+         <p>We have observed that the aggregation method scales well across lines of business
+(the indemnity and non-indemnity companies) and states. This was demonstrated using
+many of our decision tree experiments and visualizations using <i>ALLVAR-2</i> samples and
+subsamples by state.</p><br><br>
+             
+         <h1 style="text-align: center;">Acknowledgments</h1>
+
+    <div style="text-align: left; margin: 20px;">
+        <p>Support for this research was provided in part by the Army Research Lab under
+            grant ARL-PET-IMT-KSU-07, by the Office of Naval Research under grant N00014-01-
+            1-0519, and by the Naval Research Laboratory under grant N00014-97-C-2061. The author
+            thanks Nathan D. Gettings for helpful discussions on data fusion and time series analysis
+            and an anonymous reviewer for comments on background material. Thanks also to David
+            Clutter, Matt A. Durst, Nathan D. Gettings, James A. Louis, Yuching Ni, Yu Pan, Mike
+            Perry, James W. Plummer, Victoria E. Lease, Tom Redman, Cecil P. Schmidt, and Kris
+            Wuollett for implementations of software components of the system described in this
+            chapter.
+        </p>
+
+        <p><i>Table 4: Results from Jenesis for One Company (5-way cross validation), representative
+            data sets</i><br>
+            <p style="text-align: center;"><img src="images/img5.jpg" alt="Image Description">
+        </p>
+    </div>
+         </div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>
